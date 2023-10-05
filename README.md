@@ -18,14 +18,9 @@ To run the MATLAB code, follow these steps:
 
 This code relies on MATLAB.
 
-## License
+## License and Contact Info
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-## Conclusion
-
-This MATLAB code provides an implementation of safe physics-informed data-driven control. You can customize the parameters and use them for your specific control system applications.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. You can customize the parameters and use them for your specific control system applications.
 
 If you have any questions or encounter issues, please feel free to [contact me](mailto:niknejad@msu.edu).
 
