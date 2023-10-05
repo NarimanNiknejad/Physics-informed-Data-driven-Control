@@ -1,6 +1,6 @@
 # Physics-informed Data-driven Safe and Optimal Control Design
 
-This repository contains MATLAB codes for implementing safe and physics-informed data-driven control.
+This repository contains MATLAB codes for implementing safe and optimal physics-informed data-driven control.
 
 ## Usage
 
