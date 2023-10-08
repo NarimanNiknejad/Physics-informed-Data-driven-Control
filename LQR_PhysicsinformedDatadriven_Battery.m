@@ -398,7 +398,7 @@ set(h, 'LineWidth', 3); % Set line width for all lines
 xlabel('Steps');
 ylabel('log(Average Cost)');
 % title('Costs vs. Steps');
-legend('Robust LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model Based LQR');
+legend('Uncertain Model LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model-based LQR');
 grid on;
 
 % Adjust the appearance
@@ -434,7 +434,7 @@ h = plot(t_, x_1_uc, 'b-', t_, x_1_dt, 'r--', t_, x_1_tf, 'g:', t_, x_1_lqr, 'm-
 set(h, 'LineWidth', 3); % Set line width for all lines
 xlabel('Steps');
 ylabel('V1');
-legend('Robust LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model Based LQR');
+legend('Uncertain Model LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model-based LQR');
 grid on;
 
 ax = gca;
@@ -446,7 +446,7 @@ h = plot(t_, x_2_uc, 'b-', t_, x_2_dt, 'r--', t_, x_2_tf, 'g:', t_, x_2_lqr, 'm-
 set(h, 'LineWidth', 3); % Set line width for all lines
 xlabel('Steps');
 ylabel('V2');
-legend('Robust LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model Based LQR');
+legend('Uncertain Model LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model-based LQR');
 grid on;
 
 ax = gca;
@@ -459,7 +459,7 @@ h = plot(t_, x_3_uc, 'b-', t_, x_3_dt, 'r--', t_, x_3_tf, 'g:', t_, x_3_lqr, 'm-
 set(h, 'LineWidth', 3); % Set line width for all lines
 xlabel('Steps');
 ylabel('SoC');
-legend('Robust LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model Based LQR');
+legend('Uncertain Model LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model-based LQR');
 grid on;
 
 ax = gca;
@@ -472,7 +472,7 @@ set(h, 'LineWidth', 3); % Set line width for all lines
 xlabel('Steps');
 ylabel('Control input');
 % title('Costs vs. Steps');
-legend('Robust LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model Based LQR');
+legend('Uncertain Model LQR', 'Data-driven LQR', 'Ph-DD LQR', 'Model-based LQR');
 grid on;
 
 ax = gca;
