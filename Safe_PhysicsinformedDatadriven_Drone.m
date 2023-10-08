@@ -112,8 +112,7 @@ mat_dt = -[  C_dt, B_dt';
 
 padded_mat_dt = padarray(mat_dt, [2 2], 0, 'post');
 
-%% Define parameters for lambda_contracted ellipsoid that falls at the intersection of the two abobe ellipsoids
-
+%% Define parameters for lambda_contracted ellipsoid 
 
 Qs = sdpvar(nInputs,nStates);
 Ps = sdpvar(nStates,nStates);
