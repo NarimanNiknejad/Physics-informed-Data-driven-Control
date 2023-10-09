@@ -38,7 +38,7 @@ Bz = [0.0;
      1 / (m)];
 Cz = [1, 0];
 
-% Finding the discrete time dynamics of the drone 
+% Finding the discrete-time dynamics of the drone 
 time_step = 0.01;
 sys = ss(Az,Bz,Cz,[]);
 dis = c2d(sys,time_step,'zoh');
@@ -51,9 +51,9 @@ At = [0.95, 0.1;
 Bt = [0.0000;
     0.0072];
 
-%% Define the parameters related to the source system and the target system
+%% Define the parameters related to the actual system and the nominal system
 
-% The difference between the actual system and the target system
+% The difference 
 ep_AB = 0.001;
 delta_A =  ep_AB*eye(nStates);
 delta_B = ep_AB*[0;1];
@@ -62,7 +62,7 @@ As = At - delta_A;
 Bs = Bt - delta_B;
 
 
-%% Define parameters for uncertain system 
+%% Define parameters for the physics-informed set
 
 SourceSys = [As, Bs]';
 A_us = eye(nStates+nInputs);
@@ -75,7 +75,7 @@ mat_us = -[C_us, B_us';
 padded_mat_us = padarray(mat_us, [2 2], 0, 'post');
 %% Define parameters for collected data
 
-% first we need to collect some data from the target system
+% First we need to collect some data from the actual system
 N = nStates + 1;
 
 X = zeros(nStates,N+1);
@@ -102,7 +102,7 @@ if(rank(data)<min(size(data)))
 
 end
 
-% Now we define the parameters for the data based uncertainty
+% Now we define the parameters for the data-driven uncertainty
 A_dt = data_use*data_use';
 B_dt = -data_use*X1';
 C_dt = -sigma + X1*X1';
@@ -112,7 +112,7 @@ mat_dt = -[  C_dt, B_dt';
 
 padded_mat_dt = padarray(mat_dt, [2 2], 0, 'post');
 
-%% Define parameters for lambda_contracted ellipsoid 
+%% Define parameters for Ph-DD safe algorithm
 
 Qs = sdpvar(nInputs,nStates);
 Ps = sdpvar(nStates,nStates);
@@ -169,9 +169,8 @@ end
 K_safe = Q_safe_opt*inv(P_safe_opt);  
 
 
-%% Combining the two gains
 
-% Main loop
+%% Main loop
 x = zeros(nRealization,nStates,nSteps+1);
 x0 = [-0.84, 2.32]';
 
