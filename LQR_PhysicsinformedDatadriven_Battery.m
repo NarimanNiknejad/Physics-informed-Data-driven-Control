@@ -28,7 +28,7 @@ sigma = coVarMatrix;
 noise = noise_generator(mu,sigma,nStates,nSample,nRealization);
 
 
-%% Define the parameters related to the source system
+%% Define the parameters related to the actual system
 
 At = [0.0678, 0, 0;
       0, 0.9609, 0
@@ -37,16 +37,16 @@ At = [0.0678, 0, 0;
 Bt = [0.0257;
       0.2850;
      -0.0250];
-%% The difference between the actual system and the target system
+%% The difference between the actual system and the nominal system
 ep_AB = 0.08;
 delta_A =  ep_AB*ones(nStates);
 delta_B = ep_AB*ones(nStates,nInputs);
-%% Define the parameters of the target system
+%% Define the parameters of the nominal system
 
 As = At - delta_A/2;
 Bs = Bt - delta_B/2;
 
-%% Define parameters for uncertain system 
+%% Define parameters for the physics-informed set
 
 SourceSys = [As, Bs]';
 A_us = eye(nStates+nInputs);
@@ -59,7 +59,7 @@ mat_us = -[C_us, B_us';
 padded_mat_us = padarray(mat_us, [nStates nStates], 0, 'post');
 %% Define parameters for collected data
 
-% first we need to collect some data from the target system
+% first we need to collect some data from the actual system
 N = nStates + 1;
 
 X = zeros(nStates,N+1);
@@ -86,7 +86,7 @@ if(rank(data)<min(size(data)))
 
 end
 
-% Now we define the parameters for the data based uncertainty
+% Now we define the parameters for the data-based uncertainty
 A_dt = data_use*data_use';
 B_dt = -data_use*X1';
 C_dt = -sigma + X1*X1';
@@ -97,7 +97,7 @@ mat_dt = -[  C_dt, B_dt';
 padded_mat_dt = padarray(mat_dt, [nStates nStates], 0, 'post'); 
 
 
-%% Define parameters for optimal ellipsoid that falls at the intersection of the two above ellipsoids
+%% Define parameters for optimal ellipsoid that falls at the intersection of the two above information sets
 
 W_x = [1,0,0;
     0,1,0;
@@ -139,7 +139,7 @@ constraintO_5 = L - [0 , Qo;
 constraintO_6 = trace(W_x*Po) +trace(W_u*L)<=gamma;
 constraintO_7 = Po>=eye(nStates);
 
-constraints_o_ =   constraintO_1 + constraintO_2 + constraintO_3+ constraintO_4  + constraintO_5 + constraintO_6 + constraintO_7 ;
+constraints_o_ =   constraintO_1 + constraintO_2 + constraintO_3+ constraintO_4  + constraintO_5 + constraintO_6 + constraintO_7;
 cost_o_ = gamma;
 
 ops = sdpsettings('solver','mosek','verbose',0);
@@ -165,7 +165,7 @@ K_opt = Q_opt_o*inv(P_opt_o);
 x0 = [15 10 -25]';
 
 
-%% transfer learning lqr
+%%Ph-DD lqr
 
 % Main loop
 x = zeros(nRealization,nStates,nSteps+1);
@@ -189,7 +189,7 @@ for ii = 1:nRealization
 
 end
 
-%% DLQR model based
+%% DLQR model-based
 Q = W_x;
 R = W_u;
 K_lqr = dlqr(At,Bt,Q,R);
@@ -216,7 +216,7 @@ end
 
 
 
-%% Data only
+%% Data-based LQR
 
 
 Qo = sdpvar(nInputs,nStates);
@@ -291,7 +291,7 @@ for ii = 1:nRealization
 
 end
 
-%% Uncertain only 
+%% Uncertain Model LQR
 
 Qo_us = sdpvar(nInputs,nStates);
 Po_us = sdpvar(nStates,nStates);
