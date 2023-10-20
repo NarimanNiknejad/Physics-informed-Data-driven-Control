@@ -40,7 +40,7 @@ Follow the installation instructions provided by MOSEK to install the software o
 
 1. MOSEK requires a license to use. You can request a free academic license, a trial license, or purchase a commercial license.
 
-2. To request an academic license or a trial license, visit the MOSEK License Request page: [MOSEK License Request](https://www.mosek.com/license/).
+2. To request an academic license or a trial license, visit the MOSEK License Request page.
 
 3. Follow the steps on the license request page to obtain your license file. This file will be used to activate MOSEK on your machine.
 
@@ -52,10 +52,7 @@ Once you have installed MOSEK and obtained a valid license, you need to configur
 
 1. Locate the MOSEK installation directory on your system.
 
-2. In MATLAB, set up the path to include the MOSEK directory. You can do this by running the following command in the MATLAB command window, replacing `/path/to/mosek` with the actual path to your MOSEK installation directory:
-
-   ```matlab
-   addpath('/path/to/mosek');
+2. In MATLAB, set up the path to include the MOSEK directory. 
 
 
 ## License and Contact Info
