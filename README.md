@@ -20,6 +20,44 @@ To run the MATLAB code, follow these steps:
 
 This code relies on MATLAB.
 
+## Obtaining and Licensing MOSEK for MATLAB
+
+MOSEK is a powerful optimization solver that can be used with MATLAB to solve various mathematical optimization problems. To get started with MOSEK for MATLAB, follow these steps:
+
+### 1. Download MOSEK
+
+1. Visit the MOSEK download page: [MOSEK Download](https://www.mosek.com/downloads/).
+
+2. Select the appropriate version of MOSEK for your operating system. MOSEK provides versions for Windows, Linux, and macOS.
+
+3. Download the MOSEK installation package.
+
+### 2. Install MOSEK
+
+Follow the installation instructions provided by MOSEK to install the software on your system.
+
+### 3. Obtain a License
+
+1. MOSEK requires a license to use. You can request a free academic license, a trial license, or purchase a commercial license.
+
+2. To request an academic license or a trial license, visit the MOSEK License Request page: [MOSEK License Request](https://www.mosek.com/license/).
+
+3. Follow the steps on the license request page to obtain your license file. This file will be used to activate MOSEK on your machine.
+
+4. If you decide to purchase a commercial license, contact MOSEK directly through their website for more information on pricing and licensing options.
+
+### 4. Configure MOSEK for MATLAB
+
+Once you have installed MOSEK and obtained a valid license, you need to configure it for MATLAB:
+
+1. Locate the MOSEK installation directory on your system.
+
+2. In MATLAB, set up the path to include the MOSEK directory. You can do this by running the following command in the MATLAB command window, replacing `/path/to/mosek` with the actual path to your MOSEK installation directory:
+
+   ```matlab
+   addpath('/path/to/mosek');
+
+
 ## License and Contact Info
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. You can customize the parameters and use them for your specific control system applications.
