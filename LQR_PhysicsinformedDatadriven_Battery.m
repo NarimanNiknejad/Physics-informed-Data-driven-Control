@@ -36,7 +36,7 @@ At = [0.0678, 0, 0;
       0, 0.9609, 0
       0, 0, 0.98];
 
-Bt = [0.0257;
+Bt = [0.0251;
       0.2850;
      -0.0250];
 %% The difference between the actual system (A_t, B_t) and the nominal system (A_s,B_s)
