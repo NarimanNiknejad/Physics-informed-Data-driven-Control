@@ -99,7 +99,7 @@ mat_dt = -[  C_dt, B_dt';
 padded_mat_dt = padarray(mat_dt, [nStates nStates], 0, 'post'); 
 
 
-%% Define parameters for optimal ellipsoid (Lyapanov ellipsoid based on Controllability Gramian) 
+%% Define parameters for optimal ellipsoid (Lyapunov ellipsoid based on Controllability Gramian) 
 
 W_x = [1,0,0;
     0,1,0;
@@ -166,7 +166,7 @@ K_opt = Q_opt_o*inv(P_opt_o);
 x0 = [6 6 0.25]';
 
 
-%% transfer learning lqr
+%% Ph-DD LQR
 
 % Main loop
 x = zeros(nRealization,nStates,nSteps+1);
