@@ -5,6 +5,11 @@ The paper can be accessed via this link:
 
 [DOI](https://doi.org/10.1109/LCSYS.2023.3333257)
 
+## Citation
+If you found this page useful for your research, please cite it as:
+
+[Niknejad, N., & Modares, H. (2023). Physics-Informed Data-Driven Safe and Optimal Control Design. Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/lcsys.2023.3333257]
+
 # Abstract
 This paper introduces a novel approach that is based on a physics-informed data-driven approach to design a robust controller for discrete-time linear time-invariant systems. The goal is to enhance both the performance and feasibility of safe and optimal control design, all without the need for explicit system modeling. The idea is to start from a robust control design when no data samples are available using physics information and progressively move towards a fully adaptive controller as more data becomes available. This will enhance the feasibility of designing a safe control system and elevate the performance of an optimal control system. It achieves this by integrating safety and performance specifications for systems that lie at the intersection of two information sets: the physics-informed set of possible system models and the data-conformity set of models. This intersection set is non-empty if the prior knowledge includes the actual system model. Besides, it is smaller than physics-informed and data-conformity sets. Linear Matrix inequality conditions are provided to robustly satisfy the safety and performance of the systems that fall at the intersection set. Two applications are presented to verify the theoretical results: the safe hovering of a quadcopter and the quadratic stabilization of a Lithium-ion battery.
 
