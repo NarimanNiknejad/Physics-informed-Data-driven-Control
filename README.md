@@ -1,6 +1,6 @@
 # Physics-informed Data-driven Safe and Optimal Control Design
 This repository contains MATLAB codes for implementing safe and optimal physics-informed data-driven controls for "Physics-informed Data-driven Safe and Optimal Control Design" submitted to IEEE Control Systems Letters.
-[![DOI](https://img.shields.io/badge/DOI-10.1234/abcd-blue)](https://doi.org/10.1109/LCSYS.2023.3333257)
+[![DOI](https://img.shields.io/badge/DOI-10.1109/LCSYS.2023.3333257)](https://doi.org/10.1109/LCSYS.2023.3333257)
 
 
 # Abstract
