@@ -72,7 +72,7 @@ Enjoy exploring and using the code!
 ## Citation
 If you found this page useful for your research, please cite it as:
 
-[Niknejad, N., & Modares, H. (2023). Physics-Informed Data-Driven Safe and Optimal Control Design. Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/lcsys.2023.3333257]
+N. Niknejad and H. Modares, "Physics-Informed Data-Driven Safe and Optimal Control Design," in IEEE Control Systems Letters, doi: 10.1109/LCSYS.2023.3333257.
 
 
 Watch the video of the safe hovering of the drone here:
