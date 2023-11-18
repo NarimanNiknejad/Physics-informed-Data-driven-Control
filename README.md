@@ -22,9 +22,6 @@ To run the MATLAB code, follow these steps:
 
 4. Run the script to simulate and visualize the results.
 
-## Dependencies
-
-This code relies on MATLAB.
 
 ## Obtaining and Licensing MOSEK for MATLAB
 
