@@ -166,7 +166,7 @@ K_opt = Q_opt_o*inv(P_opt_o);
 x0 = [6 6 0.25]';
 
 
-%% Ph-DD LQR
+%% transfer learning lqr
 
 % Main loop
 x = zeros(nRealization,nStates,nSteps+1);
@@ -190,7 +190,7 @@ for ii = 1:nRealization
 
 end
 
-%% DLQR model based (based on exact model of the system)
+%% DLQR model-based (based on the exact model of the system)
 Q = W_x;
 R = W_u;
 K_lqr = dlqr(At,Bt,Q,R);
@@ -373,7 +373,122 @@ for ii = 1:nRealization
     end
 
 end
-%% plot all the results in one place
+%% Plot all the results in one place
+% 
+% cost_dt = zeros(nSteps,1);
+% cost_uc = zeros(nSteps,1);
+% cost_lqr = zeros(nSteps,1);
+% cost_uc_dt = zeros(nSteps,1);
+% 
+% 
+% for k=1:nSteps
+%     cost_temp_uc = 0;
+%     cost_temp_dt = 0;
+%     cost_temp_uc_dt = 0;
+%     cost_temp_lqr = 0;
+% 
+%     for j=1:k
+%         cost_temp_lqr = cost_temp_lqr + (x_lqr(ii,:,j)*W_x*x_lqr(ii,:,j)' + u_lqr(:,j)'*W_u*u_lqr(:,j));
+%         cost_temp_dt = cost_temp_dt + (x_opt_dt(ii,:,j)*W_x*x_opt_dt(ii,:,j)' + u_opt_dt(:,j)'*W_u*u_opt_dt(:,j));
+%         cost_temp_uc = cost_temp_uc + (x_opt_uc(ii,:,j)*W_x*x_opt_uc(ii,:,j)' + u_opt_uc(:,j)'*W_u*u_opt_uc(:,j));
+%         cost_temp_uc_dt = cost_temp_uc_dt + (x(ii,:,j)*W_x*x(ii,:,j)' + u(:,j)'*W_u*u(:,j));
+%     end
+%    cost_lqr(k) = cost_temp_lqr/k;
+%    cost_uc(k) = cost_temp_uc/k;
+%    cost_dt(k) = cost_temp_dt/k;
+%    cost_uc_dt(k) = cost_temp_uc_dt/k;
+% end
+% 
+% 
+% 
+% % Create the plot
+% figure;
+% h = plot(t, cost_uc, 'b-', t, cost_dt, 'r--', t, cost_uc_dt, 'g-.', t, cost_lqr, 'm-.');
+% set(h, 'LineWidth', 4); % Set line width for all lines
+% xlabel('Steps');
+% ylabel('log(Average Cost)');
+% % title('Costs vs. Steps');
+% legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
+% grid on;
+% 
+% % Adjust the appearance
+% set(gca, 'yscale', 'log'); % Use logarithmic scale for the y-axis
+% 
+% ax = gca;
+% ax.FontSize = 24; 
+% 
+% x_1_tf = reshape(x(ii,1,:),[nSteps+1,1]);
+% x_2_tf = reshape(x(ii,2,:),[nSteps+1,1]);
+% x_3_tf = reshape(x(ii,3,:),[nSteps+1,1]);
+% 
+% x_1_lqr = reshape(x_lqr(ii,1,:),[nSteps+1,1]);
+% x_2_lqr = reshape(x_lqr(ii,2,:),[nSteps+1,1]);
+% x_3_lqr = reshape(x_lqr(ii,3,:),[nSteps+1,1]);
+% 
+% x_1_dt = reshape(x_opt_dt(ii,1,:),[nSteps+1,1]);
+% x_2_dt = reshape(x_opt_dt(ii,2,:),[nSteps+1,1]);
+% x_3_dt = reshape(x_opt_dt(ii,3,:),[nSteps+1,1]);
+% 
+% x_1_uc = reshape(x_opt_uc(ii,1,:),[nSteps+1,1]);
+% x_2_uc = reshape(x_opt_uc(ii,2,:),[nSteps+1,1]);
+% x_3_uc = reshape(x_opt_uc(ii,3,:),[nSteps+1,1]);
+% 
+% % Create a new figure and set its position
+% figure;
+% set(gcf, 'Position', [100, 100, 800, 800]);
+% 
+% % Create the subplots
+% subplot(3, 1, 1);
+% 
+% h = plot(t_, x_1_uc, 'b-', t_, x_1_dt, 'r--', t_, x_1_tf, 'g-.', t_, x_1_lqr, 'm-.');
+% set(h, 'LineWidth', 4); % Set line width for all lines
+% xlabel('Steps');
+% ylabel('V1');
+% legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
+% grid on;
+% 
+% ax = gca;
+% ax.FontSize = 24; 
+% 
+% subplot(3, 1, 2);
+% 
+% h = plot(t_, x_2_uc, 'b-', t_, x_2_dt, 'r--', t_, x_2_tf, 'g:', t_, x_2_lqr, 'm-.');
+% set(h, 'LineWidth', 4); % Set line width for all lines
+% xlabel('Steps');
+% ylabel('V2');
+% legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
+% grid on;
+% 
+% ax = gca;
+% ax.FontSize = 24; 
+% 
+% 
+% subplot(3, 1, 3);
+% 
+% h = plot(t_, x_3_uc, 'b-', t_, x_3_dt, 'r--', t_, x_3_tf, 'g-.', t_, x_3_lqr, 'm-.');
+% set(h, 'LineWidth', 4); % Set line width for all lines
+% xlabel('Steps');
+% ylabel('SoC');
+% legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
+% grid on;
+% 
+% ax = gca;
+% ax.FontSize = 24; 
+% 
+% % Create the plot
+% figure;
+% h = plot(t, u_opt_uc, 'b-', t, u_opt_dt, 'r--', t, u, 'g-.', t, u_lqr, 'm-.');
+% set(h, 'LineWidth', 4); % Set line width for all lines
+% xlabel('Steps');
+% ylabel('Control input');
+% % title('Costs vs. Steps');
+% legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
+% grid on;
+% 
+% ax = gca;
+% ax.FontSize = 24; 
+
+%% plot all the results in one place - sum of costs 
 
 cost_dt = zeros(nSteps,1);
 cost_uc = zeros(nSteps,1);
@@ -393,10 +508,10 @@ for k=1:nSteps
         cost_temp_uc = cost_temp_uc + (x_opt_uc(ii,:,j)*W_x*x_opt_uc(ii,:,j)' + u_opt_uc(:,j)'*W_u*u_opt_uc(:,j));
         cost_temp_uc_dt = cost_temp_uc_dt + (x(ii,:,j)*W_x*x(ii,:,j)' + u(:,j)'*W_u*u(:,j));
     end
-   cost_lqr(k) = cost_temp_lqr/k;
-   cost_uc(k) = cost_temp_uc/k;
-   cost_dt(k) = cost_temp_dt/k;
-   cost_uc_dt(k) = cost_temp_uc_dt/k;
+   cost_lqr(k) = cost_temp_lqr/1;
+   cost_uc(k) = cost_temp_uc/1;
+   cost_dt(k) = cost_temp_dt/1;
+   cost_uc_dt(k) = cost_temp_uc_dt/1;
 end
 
 
@@ -406,7 +521,7 @@ figure;
 h = plot(t, cost_uc, 'b-', t, cost_dt, 'r--', t, cost_uc_dt, 'g-.', t, cost_lqr, 'm-.');
 set(h, 'LineWidth', 4); % Set line width for all lines
 xlabel('Steps');
-ylabel('log(Average Cost)');
+ylabel('log (Total Cost)');
 % title('Costs vs. Steps');
 legend('Uncertain Model', 'Data-driven', 'Ph-DD', 'Model-based');
 grid on;
